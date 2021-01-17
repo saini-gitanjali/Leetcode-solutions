@@ -1,0 +1,24 @@
+class Solution {
+public:
+    unordered_map<int, int> map;
+    
+    int fib(int n) {
+        
+        int result;
+        
+        if(map.find(n)!=map.end())
+            return map[n];
+        
+        if(n<=1)
+            return n;
+        
+        else
+        {
+            map[n] = fib(n-1) + fib(n-2);
+
+        }
+
+        return map[n];
+        
+    }
+};
