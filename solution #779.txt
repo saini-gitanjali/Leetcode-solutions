@@ -5,9 +5,8 @@ public:
             return 0;
         int mid  =  pow(2, N-1)/2;
         if(K<=mid)
-            return kthGrammar(N-1, K);
+            return kthGrammar(N-1, K);              //kth symbol in first half of nth row is kth symbol in (n-1)th row
         else 
-            return !kthGrammar(N-1, K-mid);
-        
+            return !kthGrammar(N-1, K-mid);         //kth symbol in first half of nth row is complement (k-mid)th symbol in (n-1)th row
     }
 };
