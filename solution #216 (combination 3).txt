@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void backtrack(vector<int> &c, int start, int target, vector<int> v, vector<vector<int>> &result, int k){
+        if(target < 0)
+            return;
+        if(target == 0 && v.size()==k) // size==k becuase only k element are to be used 
+            result.push_back(v);
+        for(int i=start; i<c.size(); i++)
+        {
+            if( i> start && c[i] == c[i-1])
+                continue;
+            v.push_back(c[i]);
+            backtrack(c, i+1, target - c[i], v, result, k); //i+1 because we don't want to include the element more than once
+            
+            v.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum3(int k, int target) {
+        vector<int> c;
+        for(int i=1; i<=9; i++)
+            c.push_back(i);
+        vector<vector<int>> result;
+        vector<int> v;
+        backtrack(c, 0, target, v, result, k);
+        return result;
+    }
+};
