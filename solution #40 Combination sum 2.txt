@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void backtrack(vector<int> &c, int start, int target, vector<int> v, vector<vector<int>> &result){
+        if(target < 0)
+            return;
+        if(target == 0)
+            result.push_back(v);
+        for(int i=start; i<c.size(); i++)
+        {
+            if( i> start && c[i] == c[i-1])
+                continue;
+            v.push_back(c[i]);
+            backtrack(c, i+1, target - c[i], v, result); //i+1 because we don't want to include the element more than once
+            
+            v.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum2(vector<int>& c, int target) {
+        vector<vector<int>> result;
+        vector<int> v;
+        sort(c.begin(), c.end());
+        backtrack(c, 0, target, v, result);
+        return result;
+    }
+};
