@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int amount(vector<int> arr) {
+        int n = arr.size();
+        if(n==0)
+            return 0;
+        vector<int> max_amt(n);
+        max_amt[0] = arr[0];
+        
+        max_amt[1] = max(arr[0], arr[1]);
+        for(int i=2; i<n; i++)
+            max_amt[i] = max(max_amt[i-2]+arr[i], max_amt[i-1]);
+        return max_amt[n-1];
+    }
+    int rob(vector<int>& nums) {
+        
+        if(nums.size() == 1)
+            return nums[0];
+        if(nums.size() == 2)
+            return max(nums[0], nums[1]);
+        vector<int> a(nums.begin(), nums.end()-1);  //including the first house
+        vector<int> b(nums.begin()+1, nums.end());  //excluding the first house
+        return max(amount(a), amount(b));
+    }
+};
